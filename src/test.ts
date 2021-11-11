@@ -56,8 +56,32 @@ function parseAuthHeader(hdrValue): any | null {
 export enum Role {
 	Admin = 'admin',
 	SuperAdmin = 'superAdmin',
+	Supervisor = 'superVisor',
+	AdminRoleView = 'admin.role.view',
+	AdminRoleEdit = 'admin.role.edit',
+	AdminRoleCreate = 'admin.role.create',
+	AdminRoleDelete = 'admin.role.delete',
+	AdminWorkerView = 'admin.worker.view',
+	AdminWorkerEdit = 'admin.worker.edit',
+	AdminWorkerCreate = 'admin.worker.create',
+	AdminWorkerDelete = 'admin.worker.delete',
+	AdminAgencyView = 'admin.agency.view',
+	AdminAgencyCreate = 'admin.agency.create',
+	AdminAgencyEdit = 'admin.agency.edit',
+	AdminAgencyDelete = 'admin.agency.delete',
+	AdminPositionView = 'admin.position.view',
+	AdminPositionEdit = 'admin.position.edit',
+	AdminPositionCreate = 'admin.position.create',
+	AdminPositionDelete = 'admin.position.delete',
+	AdminPunchList = 'admin.punch.list',
+	AdminPunchCreate = 'admin.punch.create',
+	AdminPunchEdit = 'admin.punch.edit',
+	AdminPunchDelete = 'admin.punch.delete',
+	AdminSupervisorView = 'admin.supervisor.view',
+	AdminSupervisorEdit = 'admin.supervisor.edit',
+	AdminSupervisorSummaryView = 'admin.supervisor.summary.view',
 }
-export function GQLUserRole(permissionNames: string | string[]): MiddlewareFn {
+export const GQLUserRole = (permissionNames: string | string[]): MiddlewareFn => {
 	return async ({ info, context, args }, next) => {
 		// Throw an error if JWT verification fault.
 		if (!context['user']) throw new Error('Permission denied.');
