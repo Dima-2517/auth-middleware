@@ -1,6 +1,6 @@
 {
   "name": "@nowsta/auth-middleware",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Nowsta 2.0 Auth Middleware",
   "author": "Dima D. <dmytro.dudariev@nowsta.com>",
   "license": "MIT",
