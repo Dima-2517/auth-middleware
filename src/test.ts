@@ -23,10 +23,10 @@ export const GQLAuthGuard: MiddlewareFn = async ({ info, context, args }, next) 
 	const token = fromAuthHeaderAsBearerToken(context);
 	const auth = <UserTokenInterface>jwt.verify(token, process.env.JWT_SECRET);
 
-	if (!auth?.status) {
+	if ((auth && !auth.status) || !auth) {
 		throw new Error('Authorization failed.');
 	}
-	if (new Date(new Date().toUTCString().slice(0, -4)) > new Date(auth?.jwtExpired)) {
+	if (new Date(new Date().toUTCString().slice(0, -4)) > new Date(auth.jwtExpired)) {
 		throw new Error('Authorization failed.');
 	}
 	context['user'] = auth;
