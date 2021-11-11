@@ -28,9 +28,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nestjsplus/nestjs-package-starter"
+    "url": "https://github.com/Nowsta/auth-middleware.git"
   },
-  "bugs": "https://github.com/nestjsplus/nestjs-package-starter",
+  "bugs": "https://github.com/Nowsta/auth-middleware.git",
   "peerDependencies": {
     "@nestjs/common": "^6.0.0"
   },
