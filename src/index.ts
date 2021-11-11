@@ -2,4 +2,3 @@
 // for example:
 // export * from './decorators';
 export * from './test';
-export * from './gql.role.guard';
