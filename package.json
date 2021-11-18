@@ -39,6 +39,7 @@
     "amqp-connection-manager": "^3.7.0",
     "amqplib": "^0.8.0",
     "apollo-server-express": "^3.5.0",
+    "axios": "^0.24.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "graphql": "^15.6.1",

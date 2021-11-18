@@ -1,5 +1,7 @@
 import { MiddlewareFn } from 'type-graphql';
 import * as jwt from 'jsonwebtoken';
+import axios from 'axios';
+
 export interface UserTokenInterface {
 	id: number;
 	email: string;
@@ -20,8 +22,14 @@ export interface UserTokenInterface {
 const defaultAuthHeader = 'authorization';
 
 export const GQLAuthGuard: MiddlewareFn = async ({ info, context, args }, next) => {
+	let auth: UserTokenInterface;
 	const token = fromAuthHeaderAsBearerToken(context);
-	const auth = <UserTokenInterface>jwt.verify(token, process.env.JWT_SECRET);
+	const authResponse = await axios.post(process.env.AUTHENTICATION_ENDPOINT, {
+		token,
+	});
+	if (authResponse?.data && authResponse?.data?.status) {
+		auth = <UserTokenInterface>authResponse?.data?.data;
+	}
 
 	if ((auth && !auth.status) || !auth) {
 		throw new Error('Authorization failed.');
