@@ -1,5 +1,4 @@
 import { MiddlewareFn } from 'type-graphql';
-import * as jwt from 'jsonwebtoken';
 import axios from 'axios';
 
 export interface UserTokenInterface {
@@ -10,6 +9,7 @@ export interface UserTokenInterface {
 	admin: boolean;
 	superAdmin: boolean;
 	status: boolean;
+	archived: boolean;
 	workerId: number;
 	firstName: string;
 	lastName: string;
@@ -27,11 +27,11 @@ export const GQLAuthGuard: MiddlewareFn = async ({ info, context, args }, next) 
 	const authResponse = await axios.post(process.env.AUTHENTICATION_ENDPOINT, {
 		token,
 	});
-	if (authResponse?.data && authResponse?.data?.status) {
+	if (authResponse?.data && !+authResponse?.data?.archived) {
 		auth = <UserTokenInterface>authResponse?.data?.data;
 	}
 
-	if ((auth && !auth.status) || !auth) {
+	if ((auth && auth.archived) || !auth) {
 		throw new Error('Authorization failed.');
 	}
 	if (new Date(new Date().toUTCString().slice(0, -4)) > new Date(auth.jwtExpired)) {
